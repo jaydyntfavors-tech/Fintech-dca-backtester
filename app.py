@@ -49,6 +49,6 @@ for ticker in tickers:
 
 # displays results as clean dataframe
 if results:
-  st.dataframe(pd.DataFrame(results), use_container_width=True
+  st.dataframe(pd.DataFrame(results), use_container_width=True)
     
 
