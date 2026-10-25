@@ -19,36 +19,36 @@ if st.button("Run Backtest"):
   results = []
 
 # runs through tickers and runs simulation
-for ticker in tickers:
-  asset = yf.Ticker(ticker)
-  history = asset.history(period=period)
-
-  if history.empty:
-    st.warning(f"No data found for {ticker}")
-    continue
-
-  real_prices = history['Close'].tolist()
-
-  # lump sum math
-  lump_sum_shares = budget / real_prices[0]
-  lump_sum_value = lump_sum_shares * real_prices[-1]
-
-  # DCA math
-  daily_installment = budget / len(real_prices)
-  dca_shares = sum([daily_installment / p for p in real_prices])
-  dca_value = dca_shares * real_prices[-1]
-
-  # storing results
-  results.append({
-    "Asset": ticker,
-    "Lump Sum Value ($)": round(lump_sum_value, 2),
-    "DCA Value ($)": round(dca_value, 2),
-    "Difference ($)": round(abs(lump_sum_value - dca_value), 2),
-    "Winning Strategy": "Lump Sum" if lump_sum_value > dca_value else "DCA"
-  })
-
-# displays results as clean dataframe
-if results:
-  st.dataframe(pd.DataFrame(results), use_container_width=True)
+  for ticker in tickers:
+    asset = yf.Ticker(ticker)
+    history = asset.history(period=period)
+  
+    if history.empty:
+      st.warning(f"No data found for {ticker}")
+      continue
+  
+    real_prices = history['Close'].tolist()
+  
+    # lump sum math
+    lump_sum_shares = budget / real_prices[0]
+    lump_sum_value = lump_sum_shares * real_prices[-1]
+  
+    # DCA math
+    daily_installment = budget / len(real_prices)
+    dca_shares = sum([daily_installment / p for p in real_prices])
+    dca_value = dca_shares * real_prices[-1]
+  
+    # storing results
+    results.append({
+      "Asset": ticker,
+      "Lump Sum Value ($)": round(lump_sum_value, 2),
+      "DCA Value ($)": round(dca_value, 2),
+      "Difference ($)": round(abs(lump_sum_value - dca_value), 2),
+      "Winning Strategy": "Lump Sum" if lump_sum_value > dca_value else "DCA"
+    })
+  
+  # displays results as clean dataframe
+  if results:
+    st.dataframe(pd.DataFrame(results), use_container_width=True)
     
 
