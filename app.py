@@ -23,7 +23,7 @@ for ticker in tickers:
   asset = yf.Ticker(ticker)
   history = asset.history(period=period)
 
-  if history.empty:
+    if history.empty:
     st.warning(f"No data found for {ticker}")
     continue
 
