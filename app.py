@@ -9,7 +9,7 @@ st.title("DCA vs. Lump Sum Backtester")
 # Frontend UI
 col1, col2, col3 = st.columns(3)
 with col1:
-  tickers = st.multiselect("Select Assets", ["AAPL", "MSFT", "GOOGL", "AMZN", "BTC-USD"], default=["APPL", "BTC-USD"])
+  tickers = st.multiselect("Select Assets", ["AAPL", "MSFT", "GOOGL", "AMZN", "BTC-USD"], default=["AAPL", "BTC-USD"])
 with col2:
   budget = st.number_input("Total Investment ($)", min_value=100.0, value=5000.0, step=100.0)
 with col3:
